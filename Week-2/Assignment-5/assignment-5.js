@@ -8,7 +8,7 @@ function binarySearchPosition(numbers, target){
         if (numbers[mid] > target) {
             high = mid - 1; 
         } else if (numbers[mid] < target) {
-            low = mid;
+            low = mid + 1;
         } else {
             return mid;
         }
