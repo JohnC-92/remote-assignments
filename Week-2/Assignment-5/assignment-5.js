@@ -13,7 +13,9 @@ function binarySearchPosition(numbers, target){
             return mid;
         }
     }
+    return -1; // when number not found, while loop will break so return -1
 }
 
 console.log( binarySearchPosition([1, 2, 5, 6, 7], 1) ); // should print 0
 console.log( binarySearchPosition([1, 2, 5, 6, 7], 6) ); // should print 3
+console.log( binarySearchPosition([1, 2, 5, 6, 7], 8) ); // should print -1

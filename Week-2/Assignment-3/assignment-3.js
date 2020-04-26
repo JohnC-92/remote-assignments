@@ -3,10 +3,10 @@
 function avg(data) {
     let price = 0;
     let product = data.products;
-    for (let i = 0; i < product.length; i++) {
+    for (let i = 0; i < data.size; i++) {
         price += product[i].price;
     }
-    return (price/product.length);
+    return (price/data.size);
 }
 
 console.log(
