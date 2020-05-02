@@ -1,48 +1,29 @@
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+
+const app = express();
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cookieParser());
 app.use(express.static('public'));
+
 app.set('view engine','pug');
 
-app.get('/', (req, res) => {
-    res.send('Hello, My Server!');
+const mainRoutes = require('./routes/index');
+
+app.use(mainRoutes);
+
+app.use((req, res, next) => {
+    const err = new Error('Not Found'); // make self defined error 'Not Found'
+    err.status = 404;
+    next(err);
 });
 
-app.get('/getData', (req, res) => {
-    if (!req.query.number) {
-        res.send('Lack of Parameter');
-    } else {
-        const num = parseInt(req.query.number);
-        if (!Number.isInteger(num)) {
-            res.send('Wrong Parameter');
-        } else if (Number.isInteger(num)){
-            if (num>0){
-                res.send(String(num*(num+1)/2));
-            } else {
-                res.send('Wrong Parameter');
-            }
-        };    
-    }
-    
-});
-
-app.get('/myName', (req, res) => {
-    const name = req.cookies.name;
-    if (name) {
-        res.render('myName',{name:name});
-    } else {
-        res.render('myName');
-    }
-});
-
-app.get('/trackName', (req, res) => {
-    // console.log(req.query.name);
-    res.cookie('name', req.query.name);
-    res.redirect('/myName');
+app.use((err, req, res, next) => {
+    res.locals.error = err; // set local variable error to send to page
+    res.status(err.status); // set page status to error status
+    res.render('error');
 })
 
 app.listen(3000, () => {
