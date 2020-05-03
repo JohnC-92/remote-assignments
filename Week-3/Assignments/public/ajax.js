@@ -1,4 +1,4 @@
-let button = document.querySelector('button');
+let button = document.getElementById('buttonSubmit');
 
 button.addEventListener('click', () => {  
     let inputNum = document.getElementById('myText').value;
