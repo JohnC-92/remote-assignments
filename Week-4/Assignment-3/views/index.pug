@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Index Page
+    body       
+        if msg
+            p Oops, #{msg}
+            
+        h3 Hello Visitor,  Sign Up Here!
+        form(action='/signup', method='get')
+            label Please enter your email:
+                input(type='text', name='email')
+            br
+            label Please enter your password:
+                input(type='text', name='password')
+            button(type='submit') Submit
+
+        h3 Hello Visitor,  Sign In Here!
+        form(action='/signin', method='get')
+            label Please enter your email:
+                input(type='text', name='email')
+            br
+            label Please enter your password:
+                input(type='text', name='password')
+            button(type='submit') Submit
